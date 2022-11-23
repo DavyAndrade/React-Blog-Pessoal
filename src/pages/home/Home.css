@@ -1,0 +1,24 @@
+.titulo {
+    text-align: center;
+    text-decoration: underline;
+    color: blue;
+}
+
+.img {
+    height: 400px;
+    width: 1200px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.background {
+    background-color: black;
+}
+
+.texto {
+    color: black;
+    text-align: center;
+}
