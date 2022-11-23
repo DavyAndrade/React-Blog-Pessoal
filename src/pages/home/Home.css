@@ -14,12 +14,12 @@
     justify-content: center;
 }
 
-.background {
+body {
     background-color: black;
 }
 
 .texto {
-    color: black;
+    color: white;
     text-align: center;
 }
 
