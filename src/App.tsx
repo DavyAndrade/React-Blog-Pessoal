@@ -1,13 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Navbar from './componentes/estaticos/navbar/Navbar';
 import Home from './pages/home/Home';
-
+import Footer from './componentes/estaticos/footer/Footer';
 
 function App() {
   return (
     <>
-     <Home />
+      <Navbar />
+      <Home />
+      <Footer />
     </>
   );
 }

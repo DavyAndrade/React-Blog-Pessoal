@@ -15,7 +15,7 @@
 }
 
 body {
-    background-color: black;
+    background-color: white;
 }
 
 .texto {
@@ -29,4 +29,8 @@ body {
 
 .p-30 {
     padding: 30px;
+}
+
+.botão {
+    margin-right: 5px;
 }
