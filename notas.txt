@@ -1,0 +1,8 @@
+    
+    Hooks são funções que conseguem mexer com o Estado ou o Ciclo de Vida do componente.
+
+    Axios é responsável por conectar o Front-end ao Back-end.
+
+    A maior parte dos Hooks precisarão de uma variável para acessar o seu valor e uma função para modificar os seus dados.
+
+    Caminho para encontrar o Token F12 > Application > Storage > Local Storage

@@ -1,36 +1,27 @@
-.titulo {
-    text-align: center;
-    text-decoration: underline;
-    color: rgb(255, 145, 0);
-}
-
-.img {
-    height: 400px;
-    width: 1200px;
-}
-
 .container {
     display: flex;
     justify-content: center;
 }
 
-body {
+.caixa{
+    background-color: #3F51B5;
+}
+
+.titulo{
+   color: white !important;
+   font-weight: bold !important;
+}
+
+.botao{
+    border-color: white !important;
+    background-color: #3F51B5;
+    color: white !important;
+}
+
+.postagens{
     background-color: white;
 }
 
-.texto {
-    color: white;
-    text-align: center;
-}
-
-.mt-3 {
-    margin-top: 30px;
-}
-
-.p-30 {
-    padding: 30px;
-}
-
-.botão {
-    margin-right: 5px;
+.text-none{
+    text-decoration: none;
 }
