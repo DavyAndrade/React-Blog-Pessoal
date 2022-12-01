@@ -25,18 +25,22 @@ function Navbar() {
                             </Box>
                         </Link>
 
-                        <Box mx={1} className='cursor'>
-                            <Typography variant="h6" color="inherit">
-                                Postagens
-                            </Typography>
-                        </Box>
+                        <Link to='/posts' className='text-none'>
+                            <Box mx={1} className='cursor'>
+                                <Typography variant="h6" color="inherit">
+                                    Postagens
+                                </Typography>
+                            </Box>
+                        </Link>
 
-                        <Box mx={1} className='cursor'>
-                            <Typography variant="h6" color="inherit">
-                                Temas
-                            </Typography>
-                        </Box>
+                        <Link to='/temas' className='text-none'>
+                            <Box mx={1} className='cursor'>
 
+                                <Typography variant="h6" color="inherit">
+                                    Temas
+                                </Typography>
+                            </Box>
+                        </Link>
                         <Box mx={1} className='cursor'>
                             <Typography variant="h6" color="inherit">
                                 Cadastrar Tema
@@ -46,7 +50,7 @@ function Navbar() {
                         <Link to='/login' className='text-none'>
                             <Box mx={1} className='cursor'>
                                 <Typography variant="h6" color="inherit">
-                                    logout
+                                    Logout
                                 </Typography>
                             </Box>
                         </Link>

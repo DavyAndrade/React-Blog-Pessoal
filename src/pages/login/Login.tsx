@@ -1,91 +1,80 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Button, Grid, TextField, Typography } from '@material-ui/core';
+import React, { useState, useEffect, ChangeEvent } from 'react';
+import { Grid, Typography, TextField, Button } from '@material-ui/core';
 import { Box } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import './Login.css'
-import UserLogin from '../../models/UserLogin';
 import useLocalStorage from 'react-use-localstorage';
-import { login } from '../../services/Service';
+import { api } from '../../services/Service';
+import UserLogin from '../../models/UserLogin';
+import './Login.css';
 
 function Login() {
+    let navigate = useNavigate();
+    const [token, setToken] = useLocalStorage('token');
+    const [userLogin, setUserLogin] = useState<UserLogin>(
+        {
+            id: 0,
+            usuario: '',
+            senha: '',
+            token: ''
+        }
+    )
 
-    const navigate = useNavigate()
-    const [token, setToken] = useLocalStorage('token')
-    // 1 - Criaremos o Hook useState do tipo UserLogin, definindo os seus valores iniciais.
-    const [userLogin, setUserLogin] = useState<UserLogin>({
-        id: 0,
-        usuario: '',
-        senha: '',
-        token: ''
-    })
+    function updatedModel(e: ChangeEvent<HTMLInputElement>) {
 
-
-    // Método para recuperar as informações do usuário.
-    function updateModel(e: ChangeEvent<HTMLInputElement>) {
         setUserLogin({
             ...userLogin,
             [e.target.name]: e.target.value
-        }), [token]
+        })
     }
 
     useEffect(() => {
         if (token != '') {
             navigate('/home')
         }
-    })
+    }, [token])
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
-        e.preventDefault()
-
+        e.preventDefault();
         try {
+            const resposta = await api.post(`/usuarios/logar`, userLogin)
+            setToken(resposta.data.token)
 
-            await login('/usuarios/logar', userLogin, setToken)
-
-            alert('Usuário Logado com Sucesso')
-
+            alert('Usuário logado com sucesso!');
         } catch (error) {
-            alert('Dados Inválidos')
+            alert('Dados do usuário inconsistentes. Erro ao logar!');
         }
     }
 
     return (
-        <>
-            <Grid container justifyContent='center' alignItems='center'>
-
-                <Grid item alignItems='center' xs={6}>
-                    <Box paddingX={20}>
-                        <form onSubmit={onSubmit}>
-                            <Typography variant='h3' component='h3' gutterBottom color='textPrimary' align='center' className='negrito'>Entrar</Typography>
-
-                            {/* Input de Usuário */}
-                            <TextField value={userLogin.usuario} onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)} id='usuario' label='Usuário' variant='outlined' name='usuario' margin='normal' fullWidth></TextField>
-
-                            {/* Input de Senha */}
-                            <TextField value={userLogin.senha} onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)} id='senha' label='Senha' variant='outlined' margin='normal' name='senha' fullWidth type='password'></TextField>
-
-                            <Box marginTop={2} marginBottom={2} textAlign='center'>
-                                <Button type='submit' variant='contained' color='primary'>Logar</Button>
-                            </Box>
-
-                        </form>
-
-                        <Box display='flex' justifyContent='center' marginTop={2}>
-
-                            <Box marginRight={1}>
-                                <Typography variant='subtitle1' gutterBottom align='center'>Não tem uma conta?</Typography>
-                            </Box>
-
-                            <Typography variant='subtitle1' gutterBottom align='center' className='negrito'>Cadastre-se</Typography>
+        <Grid container direction='row' justifyContent='center' alignItems='center'>
+            <Grid alignItems='center' xs={6}>
+                <Box paddingX={20}>
+                    <form onSubmit={onSubmit}>
+                        <Typography variant='h3' gutterBottom color='textPrimary' component='h3' align='center' className='textos1'>Entrar</Typography>
+                        <TextField value={userLogin.usuario} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='usuario' label='usuário' variant='outlined' name='usuario' margin='normal' fullWidth />
+                        <TextField value={userLogin.senha} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='senha' label='senha' variant='outlined' name='senha' margin='normal' type='password' fullWidth />
+                        <Box marginTop={2} textAlign='center'>
+                            <Button type='submit' variant='contained' color='primary'>
+                                Logar
+                            </Button>
                         </Box>
+                    </form>
+                    <Box display='flex' justifyContent='center' marginTop={2}>
+                        <Box marginRight={1}>
+                            <Typography variant='subtitle1' gutterBottom align='center'>Não tem uma conta?</Typography>
+                        </Box>
+                        <Link to='/cadastro' className='text-none'>
+                            <Typography variant='subtitle1' gutterBottom align='center' className='negrito'>Cadastre-se!</Typography>
+                        </Link>
 
                     </Box>
-                </Grid>
-
-                <Grid item xs={6} className='imagem'></Grid>
+                </Box>
+            </Grid>
+            <Grid xs={6} className='imagem'>
 
             </Grid>
-        </>
-    )
+        </Grid>
+    );
 }
 
 export default Login;
