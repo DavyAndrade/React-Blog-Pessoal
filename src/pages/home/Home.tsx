@@ -1,11 +1,24 @@
-import React from 'react';
-import { Typography, Grid, Button } from '@material-ui/core';
-import { Box } from '@mui/material';
+import React, { useEffect } from 'react';
+import {Typography, Grid, Button} from '@material-ui/core';
+import {Box} from '@mui/material';
 import './Home.css';
-import TabPostagem from '../../componentes/posts/tabpostagem/TabPostagem';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import useLocalStorage from 'react-use-localstorage';
+import ModalPostagem from '../../componentes/posts/modalPostagem/ModalPostagem';
+import TabPostagem from '../../componentes/posts/tabPostagem/TabPostagem';
 
 function Home() {
+
+    let navigate = useNavigate();
+    const [token, setToken] = useLocalStorage('token');
+    
+    useEffect(() => {
+      if (token == "") {
+          alert("Você precisa estar logado")
+          navigate("/login")
+  
+      }
+  }, [token])
     return (
         <>
             <Grid container direction="row" justifyContent="center" alignItems="center" className='caixa'>
@@ -14,13 +27,12 @@ function Home() {
                         <Typography variant="h3" gutterBottom color="textPrimary" component="h3" align="center" className='titulo'>Seja bem vindo(a)!</Typography>
                         <Typography variant="h5" gutterBottom color="textPrimary" component="h5" align="center" className='titulo'>expresse aqui os seus pensamentos e opiniões!</Typography>
                     </Box>
-                    <Link to='/posts' className='text-none'>
                     <Box display="flex" justifyContent="center">
                         <Box marginRight={1}>
+                            <ModalPostagem />
                         </Box>
                         <Button variant="outlined" className='botao'>Ver Postagens</Button>
                     </Box>
-                    </Link>
                 </Grid>
                 <Grid item xs={6} >
                     <img src="https://i.imgur.com/H88yIo2.png" alt="" width="500px" height="500px" />

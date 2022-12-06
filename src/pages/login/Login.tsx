@@ -12,10 +12,8 @@ function Login() {
     const [token, setToken] = useLocalStorage('token');
     const [userLogin, setUserLogin] = useState<UserLogin>(
         {
-            id: 0,
             usuario: '',
             senha: '',
-            token: ''
         }
     )
 
@@ -36,7 +34,7 @@ function Login() {
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            const resposta = await api.post(`/usuarios/logar`, userLogin)
+            const resposta = await api.post(`/auth/logar`, userLogin)
             setToken(resposta.data.token)
 
             alert('Usuário logado com sucesso!');
