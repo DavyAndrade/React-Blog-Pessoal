@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Footer from './componentes/estaticos/footer/Footer';
@@ -12,10 +13,13 @@ import ListaTema from './componentes/themes/listatema/ListaTema';
 import CadastroUsuario from './pages/cadastro/Cadastro';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
+import store from './store/store';
+
 
 
 function App() {
   return (
+    <Provider store={store}>
     <Router>
       <Navbar />
 
@@ -51,6 +55,7 @@ function App() {
 
       <Footer />
     </Router>
+    </Provider>
   );
 }
 
