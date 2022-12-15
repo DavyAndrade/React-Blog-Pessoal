@@ -6,6 +6,7 @@ import Tema from '../../../models/Tema';
 import { buscaId, post, put } from '../../../services/Service';
 import { useSelector } from 'react-redux';
 import TokenState from '../../../store/tokens/tokenReducer';
+import { toast } from 'react-toastify';
 
 
 function CadastroTema() {
@@ -22,7 +23,16 @@ function CadastroTema() {
 
     useEffect(() => {
         if (token == "") {
-            alert("Você precisa estar logado")
+            toast.error('Você precisa estar logado!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
             navigate("/login")
     
         }
@@ -53,7 +63,6 @@ function CadastroTema() {
         
         async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
             e.preventDefault()
-            console.log("tema " + JSON.stringify(tema))
     
             if (id !== undefined) {
                 console.log(tema)
@@ -62,14 +71,32 @@ function CadastroTema() {
                         'Authorization': token
                     }
                 })
-                alert('Tema atualizado com sucesso');
+                toast.success('🦄 Tema Atualizado com Sucesso!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    });
             } else {
                 post(`/tema`, tema, setTema, {
                     headers: {
                         'Authorization': token
                     }
                 })
-                alert('Tema cadastrado com sucesso');
+                toast.success('🦄 Tema Cadastrado com Sucesso!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    });
             }
             back()
     

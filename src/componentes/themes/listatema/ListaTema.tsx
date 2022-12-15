@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { busca } from '../../../services/Service';
 import TokenState from '../../../store/tokens/tokenReducer';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 function ListaTema() {
     
@@ -19,7 +20,16 @@ function ListaTema() {
 
     useEffect(() => {
         if (token == '') {
-            alert("Você precisa estar logado")
+            toast.error('Você precisa estar logado!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
             navigate("/login")
         }
     }, [token])

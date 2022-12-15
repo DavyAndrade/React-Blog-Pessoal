@@ -7,6 +7,7 @@ import ModalPostagem from '../../componentes/posts/modalPostagem/ModalPostagem';
 import TabPostagem from '../../componentes/posts/tabPostagem/TabPostagem';
 import { useSelector } from 'react-redux';
 import TokenState from '../../store/tokens/tokenReducer'
+import { toast } from 'react-toastify';
 
 function Home() {
 
@@ -17,7 +18,16 @@ function Home() {
 
     useEffect(() => {
       if (token == "") {
-          alert("Você precisa estar logado")
+        toast.error('Você precisa estar logado!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
           navigate("/login")
   
       }
